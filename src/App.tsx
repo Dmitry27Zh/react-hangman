@@ -8,9 +8,11 @@ import Keyboard from './Keyboard'
 
 function App() {
   const [wordToGuess] = useState(() => {
-    return getRandomItem(words)
+    // return getRandomItem(words)
+    return 'Test'
   })
-  const [guessedLetters] = useState<string[]>([])
+  const [guessedLetters] = useState<string[]>(['g', 'z'])
+  const incorrectLetters = guessedLetters.filter((letter) => !wordToGuess.includes(letter))
 
   return (
     <div
@@ -31,7 +33,7 @@ function App() {
       >
         Lose Win
       </div>
-      <HangmanDrawing />
+      <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord />
       <Keyboard />
     </div>
