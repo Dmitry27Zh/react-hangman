@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import words from './word-list.json'
 import { getRandomItem } from './utils'
@@ -10,8 +10,31 @@ function App() {
   const [wordToGuess] = useState(() => {
     return getRandomItem(words)
   })
-  const [guessedLetters] = useState<string[]>([])
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([])
   const incorrectLetters = guessedLetters.filter((letter) => !wordToGuess.includes(letter))
+  const addGuessedLetter = useCallback(
+    (letter: string) => {
+      if (!guessedLetters.includes(letter)) {
+        setGuessedLetters((prevState) => [...prevState, letter])
+      }
+    },
+    [guessedLetters]
+  )
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const { key } = e
+
+      if (/^[a-z]$/.test(key)) {
+        e.preventDefault()
+        addGuessedLetter(key)
+      }
+    }
+    document.addEventListener('keypress', handler)
+
+    return () => {
+      document.removeEventListener('keypress', handler)
+    }
+  }, [addGuessedLetter])
 
   return (
     <div
