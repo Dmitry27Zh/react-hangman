@@ -2,6 +2,9 @@ import { useState } from 'react'
 import './App.css'
 import words from './word-list.json'
 import { getRandomItem } from './utils'
+import HangmanDrawing from './HangmanDrawing'
+import HangmanWord from './HangmanWord'
+import Keyboard from './HangmanWord'
 
 function App() {
   const [wordToGuess] = useState(() => {
@@ -28,6 +31,9 @@ function App() {
       >
         Lose Win
       </div>
+      <HangmanDrawing />
+      <HangmanWord />
+      <Keyboard />
     </div>
   )
 }
