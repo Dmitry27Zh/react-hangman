@@ -19,7 +19,16 @@ function App() {
         maxWidth: '800px',
         margin: '0 auto',
       }}
-    ></div>
+    >
+      <div
+        style={{
+          fontSize: '2rem',
+          textAlign: 'center',
+        }}
+      >
+        Lose Win
+      </div>
+    </div>
   )
 }
 
