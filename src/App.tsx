@@ -7,6 +7,7 @@ function App() {
   const [wordToGuess] = useState(() => {
     return getRandomItem(words)
   })
+  const [guessedLetters] = useState<string[]>([])
 
   return <div></div>
 }
