@@ -16,11 +16,11 @@ function App() {
   const isWinner = wordToGuess.split('').every((letter) => guessedLetters.includes(letter))
   const addGuessedLetter = useCallback(
     (letter: string) => {
-      if (!guessedLetters.includes(letter)) {
+      if (!guessedLetters.includes(letter) && !isWinner && !isLoser) {
         setGuessedLetters((prevState) => [...prevState, letter])
       }
     },
-    [guessedLetters]
+    [guessedLetters, isWinner, isLoser]
   )
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -64,6 +64,7 @@ function App() {
         activeLetters={guessedLetters.filter((letter) => wordToGuess.includes(letter))}
         inactiveLetters={incorrectLetters}
         addGuessedLetter={addGuessedLetter}
+        disabled={isWinner || isLoser}
       />
     </div>
   )
